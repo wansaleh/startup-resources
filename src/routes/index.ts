@@ -5,6 +5,8 @@ export async function get() {
   ).then((res) => res.json());
 
   return {
-    body: { resources },
+    body: {
+      resources: resources.filter((resource) => Boolean(resource.URL)),
+    },
   };
 }

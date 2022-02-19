@@ -1,18 +1,3 @@
-<script context="module" lang="ts">
-  /** @type {import('@sveltejs/kit').Load} */
-  export async function load() {
-    const resources = await fetch(
-      'https://notion-api.splitbee.io/v1/table/daaf8758b26f4618965b49f0129c3ecf'
-    ).then((res) => res.json());
-
-    return {
-      props: {
-        resources: resources.filter((resource) => Boolean(resource.URL)),
-      },
-    };
-  }
-</script>
-
 <script>
   export let resources;
 
