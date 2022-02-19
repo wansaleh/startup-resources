@@ -12,7 +12,7 @@
     class="lg:text-base group flex gap-2 items-center text-sm font-semibold leading-tight"
   >
     <span class="group-hover:text-brand transition duration-300">
-      Logo Here
+      Startup Resources
     </span>
   </a>
 
@@ -20,10 +20,11 @@
     <li>
       <a
         rel="external"
-        href="https://github.com/wansaleh/sveltekit-starter"
+        target="_blank"
+        href="https://easlo.notion.site/daaf8758b26f4618965b49f0129c3ecf?v=8bb7fe0b5cd44e139e06fe27dd7051cd"
         class="hover:underline"
       >
-        Github
+        Notion
       </a>
     </li>
     <li>

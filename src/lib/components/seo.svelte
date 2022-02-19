@@ -4,11 +4,11 @@
   import { colorMode } from '$lib/store';
 
   const defaultMeta = {
-    title: 'SvelteKit Starter',
-    siteName: 'SvelteKit Starter',
-    description: 'SvelteKit Starter With TypeScript & Tailwind.',
-    url: 'https://sveltekit-starter-wansaleh.vercel.app',
-    image: 'https://sveltekit-starter-wansaleh.vercel.app/og.jpg',
+    title: 'Startup Resources',
+    siteName: 'Startup Resources',
+    description: 'Startup Resources - from @heyeaslo&#39;s collection',
+    url: 'https://startup-resources.vercel.app',
+    image: 'https://startup-resources.vercel.app/og.jpg',
     type: 'website',
     robots: 'follow, index',
   };
