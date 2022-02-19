@@ -12,9 +12,7 @@
 <div class="relative">
   <Nav />
 
-  <main
-    class="flex relative flex-col justify-center items-center min-h-screen font-normal"
-  >
+  <main class="relative min-h-screen font-normal">
     <slot />
 
     <Footer />

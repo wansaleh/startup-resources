@@ -2,8 +2,35 @@
   export const prerender = true;
 </script>
 
-<script>
-  export let resources;
+<script lang="ts">
+  type Resource = {
+    id: string;
+    Price: string;
+    Description: string;
+    Features: string;
+    Category: string[];
+    Twitter: string;
+    URL: string;
+    Name: string;
+  };
+
+  export let resources: Resource[];
+  let filtered = resources;
+  let activeCategory = null;
+
+  $: categories = [
+    ...new Set(resources.map((r) => cleanCategory(r.Category[0]))),
+  ];
+  $: filtered = resources.filter((r) => {
+    if (activeCategory) {
+      return cleanCategory(r.Category[0]) === activeCategory;
+    }
+    return true;
+  });
+
+  function cleanCategory(category) {
+    return category.replace(/[^\p{L}\p{N}\p{P}\p{Z}{\^\$}]/gu, '').trim();
+  }
 
   function cleanDomain(url) {
     if (!url) return '';
@@ -12,25 +39,46 @@
 </script>
 
 <div class="layout py-24">
-  <h1 class="lg:text-5xl relative text-4xl font-semibold tracking-tight mb-10">
+  <h1 class="lg:text-4xl relative text-3xl font-semibold tracking-tight mb-10">
     <span>Startup Resources</span>
   </h1>
 
+  <div class="flex flex-wrap gap-2 mb-10">
+    <button
+      on:click={() => (activeCategory = null)}
+      type="button"
+      class="block text-sm bg-gray-500/30 rounded-md px-2 py-1
+      {activeCategory === null && 'bg-black text-white'}"
+    >
+      All
+    </button>
+    {#each categories as category}
+      <button
+        on:click={() => (activeCategory = category)}
+        type="button"
+        class="block text-sm bg-gray-500/30 rounded-md px-2 py-1 {activeCategory ===
+          category && 'bg-black text-white'}"
+      >
+        {category}
+      </button>
+    {/each}
+  </div>
+
   <div class="grid grid-cols-4 gap-6">
-    {#each resources as resource (resource.id)}
+    {#each filtered as resource (resource.id)}
       <div
-        class="border border-gray-500/30 p-4 rounded shadow flex flex-col overflow-hidden"
+        class="border border-gray-500/30 p-4 rounded shadow flex flex-col overflow-hidden hover:shadow-md"
       >
         <!-- <div class="-mx-4 -mt-4 mb-4">
           <img src="/static/screenshots/{resource.id}.webp" alt="" />
         </div> -->
 
-        <div>
-          <span
-            class="text-xs font-bold bg-gray-500/30 px-1.5 py-0.5 rounded-md"
-          >
-            {@html resource.Category[0].replace(' ', '&nbsp;&nbsp;')}
+        <div class="flex justify-between items-center">
+          <span class="text-xs font-bold">
+            {cleanCategory(resource.Category[0])}
           </span>
+
+          <span class="text-xs font-bold">{resource.Price}</span>
         </div>
 
         <h3 class="text-lg font-semibold mb-2 mt-2 leading-tight">
@@ -62,15 +110,28 @@
 
         <div class="flex-1" />
 
-        <div class="text-xs font-semibold line-clamp-1">
-          <a
-            href={resource.URL}
-            rel="external"
-            target="_blank"
-            class="hover:underline"
-          >
-            {cleanDomain(resource.URL)}
-          </a>
+        <div class="flex justify-between gap-4">
+          <span class="text-xs font-semibold line-clamp-1">
+            <a
+              href={resource.URL}
+              rel="external"
+              target="_blank"
+              class="hover:underline"
+            >
+              {cleanDomain(resource.URL)}
+            </a>
+          </span>
+
+          {#if resource.Twitter}
+            <a
+              href="htts://twitter.com/{resource.Twitter.substring(1)}"
+              rel="external"
+              target="_blank"
+              class="text-xs font-semibold hover:underline"
+            >
+              {resource.Twitter}
+            </a>
+          {/if}
         </div>
       </div>
     {/each}

@@ -6,7 +6,9 @@ export async function get() {
 
   return {
     body: {
-      resources: resources.filter((resource) => Boolean(resource.URL)),
+      resources: resources
+        .filter((r) => Boolean(r.URL))
+        .map((r) => ({ ...r, Twitter: r['Twitter Handle'] })),
     },
   };
 }
