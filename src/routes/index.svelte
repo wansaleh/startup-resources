@@ -20,7 +20,13 @@
 
   $: categories = [
     ...new Set(resources.map((r) => cleanCategory(r.Category[0]))),
-  ];
+  ]
+    .map((category) => ({
+      name: category,
+      count: resources.filter((r) => cleanCategory(r.Category[0]) === category)
+        .length,
+    }))
+    .sort((a, b) => b.count - a.count);
   $: filtered = resources.filter((r) => {
     if (activeCategory) {
       return cleanCategory(r.Category[0]) === activeCategory;
@@ -43,23 +49,23 @@
     <span>Startup Resources</span>
   </h1>
 
-  <div class="flex flex-wrap gap-2 mb-10">
+  <div class="flex flex-wrap gap-1.5 mb-10">
     <button
       on:click={() => (activeCategory = null)}
       type="button"
-      class="block text-sm bg-gray-500/30 rounded-md px-2 py-1
+      class="block text-sm bg-gray-500/30 rounded px-2 py-0.5
       {activeCategory === null && 'bg-black text-white'}"
     >
       All
     </button>
     {#each categories as category}
       <button
-        on:click={() => (activeCategory = category)}
+        on:click={() => (activeCategory = category.name)}
         type="button"
-        class="block text-sm bg-gray-500/30 rounded-md px-2 py-1 {activeCategory ===
-          category && 'bg-black text-white'}"
+        class="block text-sm bg-gray-500/30 rounded px-2 py-0.5 {activeCategory ===
+          category.name && 'bg-black text-white'}"
       >
-        {category}
+        {category.name}
       </button>
     {/each}
   </div>
@@ -67,7 +73,7 @@
   <div class="grid grid-cols-4 gap-6">
     {#each filtered as resource (resource.id)}
       <div
-        class="border border-gray-500/30 p-4 rounded shadow flex flex-col overflow-hidden hover:shadow-md"
+        class="border border-gray-500/30 p-4 rounded shadow flex flex-col overflow-hidden hover:shadow-md transition"
       >
         <!-- <div class="-mx-4 -mt-4 mb-4">
           <img src="/static/screenshots/{resource.id}.webp" alt="" />
