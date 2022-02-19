@@ -32,9 +32,9 @@
       <div
         class="border border-gray-500/30 p-4 rounded shadow flex flex-col overflow-hidden"
       >
-        <div class="-mx-4 -mt-4 mb-4">
+        <!-- <div class="-mx-4 -mt-4 mb-4">
           <img src="/static/screenshots/{resource.id}.webp" alt="" />
-        </div>
+        </div> -->
 
         <div>
           <span
