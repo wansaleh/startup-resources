@@ -29,7 +29,7 @@
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
-    class="hover:stroke-brand lg:h-6 h-5 transition duration-200 stroke-current"
+    class="hover:fill-current lg:h-6 h-5 transition duration-200 stroke-current"
   >
     {#if theme === 'dark'}
       <circle cx="12" cy="12" r="5" />

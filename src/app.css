@@ -36,4 +36,16 @@ strong {
   .layout {
     @apply px-6 mx-auto w-full max-w-[96rem];
   }
+
+  .link-overlay {
+    @apply relative;
+  }
+
+  .link-overlay a.link:before {
+    @apply absolute bottom-0 content-[''] cursor-pointer left-0 right-0 top-0 z-10;
+  }
+
+  .link-overlay a:not(.link) {
+    @apply relative z-20;
+  }
 }
