@@ -43,9 +43,30 @@
 </script>
 
 <div class="layout py-24">
-  <h1 class="lg:text-4xl relative text-3xl font-semibold tracking-tight mb-10">
+  <h1 class="lg:text-4xl relative text-3xl font-semibold tracking-tight mb-1">
     <span>Startup Resources</span>
   </h1>
+
+  <h2 class="lg:text-2xl relative text-xl font-normal tracking-tight mb-10">
+    Resources compiled by
+    <a
+      href="https://twitter.com/heyeaslo"
+      rel="external"
+      target="_blank"
+      class="hover:underline font-semibold"
+    >
+      @heyeaslo
+    </a>
+    on
+    <a
+      href="https://easlo.notion.site/daaf8758b26f4618965b49f0129c3ecf?v=8bb7fe0b5cd44e139e06fe27dd7051cd"
+      rel="external"
+      target="_blank"
+      class="hover:underline font-semibold"
+    >
+      Notion
+    </a>
+  </h2>
 
   <div class="flex flex-wrap gap-1.5 mb-4">
     <FilterButton
