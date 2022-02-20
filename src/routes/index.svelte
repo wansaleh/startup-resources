@@ -38,7 +38,7 @@
   });
 </script>
 
-<div class="layout py-24">
+<div class="layout pt-4 pb-20">
   <h1 class="lg:text-4xl relative text-3xl font-semibold tracking-tight mb-1">
     <span>Startup Resources</span>
   </h1>

@@ -3,9 +3,7 @@
   import ThemeSelect from './theme-select.svelte';
 </script>
 
-<div
-  class="flex absolute top-0 right-0 left-0 z-50 justify-between items-center p-6"
->
+<div class="flex justify-between items-center layout py-6">
   <a
     sveltekit:prefetch
     href="/"
