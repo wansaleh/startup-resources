@@ -1,5 +1,10 @@
 export function cleanCategory(category) {
-  return category.replace(/[^\p{L}\p{N}\p{P}\p{Z}{^$}]/gu, '').trim();
+  return category
+    .replace(/[^\p{L}\p{N}\p{P}\p{Z}{^$}]/gu, '')
+    .trim()
+    .replace('Inpiration', 'Inspiration')
+    .replace('Community & Social Media Tool', 'Community & Social Media')
+    .replace(' or ', ' & ');
 }
 
 export function cleanDomain(url) {

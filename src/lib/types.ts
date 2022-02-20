@@ -7,4 +7,8 @@ export type Resource = {
   Twitter: string;
   URL: string;
   Name: string;
+  // favicons: {
+  //   url: string;
+  //   size?: string;
+  // }[];
 };

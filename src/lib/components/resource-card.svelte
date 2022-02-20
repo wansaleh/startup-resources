@@ -15,6 +15,10 @@
   </div>
 
   <h3 class="text-lg font-semibold mb-2 mt-2 leading-tight">
+    <!-- {#if resource.favicons.length > 0}
+      <img src={resource.favicons[0].url} alt="" class="h-4 w-4 inline-block" />
+    {/if} -->
+
     <a href={resource.URL} rel="external" target="_blank" class="link">
       {resource.Name}
     </a>

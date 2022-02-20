@@ -1,3 +1,5 @@
+// import favicons from '$lib/data/favicons.json';
+
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function get() {
   const resources = await fetch(
@@ -8,7 +10,11 @@ export async function get() {
     body: {
       resources: resources
         .filter((r) => Boolean(r.URL))
-        .map((r) => ({ ...r, Twitter: r['Twitter Handle'] })),
+        .map((r) => ({
+          ...r,
+          Twitter: r['Twitter Handle'],
+          // favicons: favicons[r.id],
+        })),
     },
   };
 }

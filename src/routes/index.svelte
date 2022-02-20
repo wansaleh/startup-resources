@@ -67,16 +67,18 @@
   <div class="flex flex-wrap gap-1.5 mb-4">
     <FilterButton
       isActive={activeCategory === null}
+      count={resources.length}
       onClick={() => (activeCategory = null)}
     >
-      All ({resources.length})
+      All
     </FilterButton>
     {#each categories as category}
       <FilterButton
         isActive={activeCategory === category.name}
+        count={category.count}
         onClick={() => (activeCategory = category.name)}
       >
-        {category.name} ({category.count})
+        {category.name}
       </FilterButton>
     {/each}
   </div>

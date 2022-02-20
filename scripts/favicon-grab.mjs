@@ -1,5 +1,7 @@
-import { downloadIcons } from 'favicon-downloader';
 import { join } from 'path';
+import fetch from 'node-fetch';
+import cheerio from 'cheerio';
+import fs from 'fs';
 
 async function main() {
   process.setMaxListeners(0);
@@ -11,24 +13,56 @@ async function main() {
     'https://notion-api.splitbee.io/v1/table/daaf8758b26f4618965b49f0129c3ecf'
   ).then((res) => res.json());
 
-  Promise.all(
+  const allIcons = {};
+
+  await Promise.all(
     resources
       .filter((resource) => Boolean(resource.URL))
+      // .slice(0, 5)
       .map(async (resource) => {
-        const iconPath = join(dir, 'static/siteicons', `${resource.id}.webp`);
-
         try {
           console.log('Getting favicon', resource.URL);
 
-          await downloadIcons(resource.URL, {
-            path: iconPath,
+          const html = await fetch(resource.URL).then((res) => res.text());
+          const $ = cheerio.load(html);
+
+          const icons = [];
+          $('link[rel="icon"]').map((i, el) => {
+            icons.push({
+              url: $(el).attr('href'),
+              size: $(el).attr('sizes'),
+            });
           });
+
+          allIcons[resource.id] = icons
+            .filter(
+              (icon) =>
+                String(icon.url).endsWith('.png') ||
+                String(icon.url).endsWith('.svg')
+            )
+            .map((icon) => {
+              let url = icon.url;
+              if (!url.startsWith('http')) {
+                const slash = url.startsWith('/') ? '' : '/';
+                url = `${resource.URL.replace(/\/$/, '')}${slash}${icon.url}`;
+              }
+
+              return {
+                ...icon,
+                url,
+              };
+            });
 
           console.log('Done getting favicon', resource.URL);
         } catch (e) {
           console.error('Error getting favicon', resource.URL);
         }
       })
+  );
+
+  fs.writeFileSync(
+    join(dir, 'src/lib/data', `favicons.json`),
+    JSON.stringify(allIcons, null, 2)
   );
 }
 
