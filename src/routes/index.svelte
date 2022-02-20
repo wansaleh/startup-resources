@@ -69,14 +69,14 @@
       isActive={activeCategory === null}
       onClick={() => (activeCategory = null)}
     >
-      All
+      All ({resources.length})
     </FilterButton>
     {#each categories as category}
       <FilterButton
         isActive={activeCategory === category.name}
         onClick={() => (activeCategory = category.name)}
       >
-        {category.name}
+        {category.name} ({category.count})
       </FilterButton>
     {/each}
   </div>
