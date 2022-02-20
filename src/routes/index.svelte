@@ -53,8 +53,9 @@
     <button
       on:click={() => (activeCategory = null)}
       type="button"
-      class="block text-sm bg-gray-500/30 rounded px-2 py-0.5
-      {activeCategory === null && 'bg-black text-white'}"
+      class="block text-sm bg-gray-500/20 rounded px-2 py-0.5
+      {activeCategory === null &&
+        '!bg-black dark:!bg-white text-white dark:text-black'}"
     >
       All
     </button>
@@ -62,24 +63,25 @@
       <button
         on:click={() => (activeCategory = category.name)}
         type="button"
-        class="block text-sm bg-gray-500/30 rounded px-2 py-0.5 {activeCategory ===
-          category.name && 'bg-black text-white'}"
+        class="block text-sm bg-gray-500/20 rounded px-2 py-0.5
+        {activeCategory === category.name &&
+          '!bg-black dark:!bg-white text-white dark:text-black'}"
       >
         {category.name}
       </button>
     {/each}
   </div>
 
-  <div class="grid grid-cols-4 gap-6">
+  <div class="grid grid-cols-5 gap-6">
     {#each filtered as resource (resource.id)}
       <div
-        class="border border-gray-500/30 p-4 rounded shadow flex flex-col overflow-hidden hover:shadow-md transition"
+        class="border border-gray-500/20 p-4 rounded-md shadow flex flex-col overflow-hidden hover:shadow-md hover:border-gray-500/40"
       >
         <!-- <div class="-mx-4 -mt-4 mb-4">
           <img src="/static/screenshots/{resource.id}.webp" alt="" />
         </div> -->
 
-        <div class="flex justify-between items-center">
+        <div class="flex flex-wrap justify-between items-center">
           <span class="text-xs font-bold">
             {cleanCategory(resource.Category[0])}
           </span>

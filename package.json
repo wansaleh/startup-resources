@@ -12,6 +12,7 @@
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
   },
   "devDependencies": {
+    "@egjs/svelte-grid": "^1.9.0",
     "@sveltejs/adapter-vercel": "^1.0.0-next.43",
     "@sveltejs/kit": "^1.0.0-next.278",
     "@tailwindcss/line-clamp": "^0.3.1",
@@ -31,6 +32,7 @@
     "prettier": "^2.5.1",
     "prettier-plugin-svelte": "^2.6.0",
     "svelte": "^3.46.4",
+    "svelte-bricks": "^0.1.4",
     "svelte-dark-mode": "^2.1.0",
     "svelte-preprocess": "^4.10.3",
     "tailwindcss": "^3.0.23",
