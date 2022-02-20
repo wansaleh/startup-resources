@@ -15,7 +15,7 @@
   </a>
 
   <ul class="lg:gap-2 flex items-center text-sm font-semibold">
-    <li>
+    <!-- <li>
       <a
         rel="external"
         target="_blank"
@@ -24,7 +24,7 @@
       >
         Notion
       </a>
-    </li>
+    </li> -->
     <li>
       <ThemeSelect />
     </li>
