@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Category from '$lib/components/category.svelte';
+
   import FilterButton from '$lib/components/filter-button.svelte';
 
   import ResourceCard from '$lib/components/resource-card.svelte';
@@ -7,7 +9,6 @@
 
   export let resources: Resource[];
   let filtered = resources;
-  let activeCategory = null;
   let activePricing = null;
 
   $: pricings = ['Free', 'Paid', 'Subscription', '%'];
@@ -22,16 +23,13 @@
     .sort((a, b) => b.count - a.count);
 
   $: filtered = resources.filter((r) => {
-    if (activeCategory && activePricing) {
-      return (
-        cleanCategory(r.Category[0]) === activeCategory &&
-        r.Price.toLowerCase().includes(activePricing.toLowerCase())
-      );
-    }
-    if (activeCategory) {
-      return cleanCategory(r.Category[0]) === activeCategory;
-    }
     if (activePricing) {
+      if (activePricing === 'Paid') {
+        return (
+          r.Price.toLowerCase().includes('paid') ||
+          r.Price.toLowerCase().includes('pay')
+        );
+      }
       return r.Price.toLowerCase().includes(activePricing.toLowerCase());
     }
     return true;
@@ -65,18 +63,14 @@
   </h2>
 
   <div class="flex flex-wrap gap-1.5 mb-4">
-    <FilterButton
-      isActive={activeCategory === null}
-      count={resources.length}
-      onClick={() => (activeCategory = null)}
-    >
-      All
-    </FilterButton>
     {#each categories as category}
       <FilterButton
-        isActive={activeCategory === category.name}
         count={category.count}
-        onClick={() => (activeCategory = category.name)}
+        onClick={() => {
+          document
+            .getElementById(category.name.replace(/\s+/g, '-'))
+            .scrollIntoView({ behavior: 'smooth' });
+        }}
       >
         {category.name}
       </FilterButton>
@@ -95,30 +89,35 @@
         isActive={activePricing === pricing}
         onClick={() => (activePricing = pricing)}
       >
-        {pricing}
+        {#if pricing === 'Free'}
+          Free + Free Trial
+        {:else if pricing === '%'}
+          Profit Sharing
+        {:else}
+          {pricing}
+        {/if}
       </FilterButton>
     {/each}
   </div>
 
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
-  >
-    {#each filtered as resource (resource.id)}
-      <ResourceCard {resource} />
-    {:else}
-      <div
-        class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4 xl:col-span-5 text-center py-20 text-gray-500 text-sm font-semibold"
-      >
-        No result. <button
-          on:click={() => {
-            activeCategory = null;
-            activePricing = null;
-          }}
-          class="hover:underline font-semibold"
-        >
-          Try another filter.
-        </button>
-      </div>
+  <div>
+    {#each categories as category (category.name)}
+      <Category {category} resources={filtered} />
     {/each}
   </div>
+
+  {#if !filtered || filtered.length === 0}
+    <div
+      class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4 xl:col-span-5 text-center py-20 text-gray-500 text-sm font-semibold"
+    >
+      No result. <button
+        on:click={() => {
+          activePricing = null;
+        }}
+        class="hover:underline font-semibold"
+      >
+        Try another filter.
+      </button>
+    </div>
+  {/if}
 </div>

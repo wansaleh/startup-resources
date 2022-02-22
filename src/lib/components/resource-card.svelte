@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Resource } from '$lib/types';
-  import { cleanCategory, cleanDomain } from '$lib/utils';
+  // import { cleanCategory, cleanDomain } from '$lib/utils';
 
   export let resource: Resource;
 </script>
@@ -8,13 +8,13 @@
 <div
   class="border border-gray-500/20 p-4 rounded-md shadow flex flex-col overflow-hidden hover:shadow-md hover:border-gray-500/40 link-overlay"
 >
-  <div class="flex flex-wrap justify-between items-center">
+  <!-- <div class="flex flex-wrap justify-between items-center">
     <span class="text-xs font-bold">
       {cleanCategory(resource.Category[0])}
     </span>
-  </div>
+  </div> -->
 
-  <h3 class="text-lg font-semibold mb-2 mt-2 leading-tight">
+  <h3 class="text-lg font-semibold mb-2 mt-0 leading-tight">
     <!-- {#if resource.favicons.length > 0}
       <img src={resource.favicons[0].url} alt="" class="h-4 w-4 inline-block" />
     {/if} -->
