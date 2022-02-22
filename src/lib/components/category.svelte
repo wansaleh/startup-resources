@@ -19,8 +19,8 @@
   >
     <div>
       <div class="sticky top-6">
-        <h3 class="text-2xl font-semibold">{category.name}</h3>
-        <div class="text-lg text-gray-500 mb-4">
+        <h3 class="text-2xl font-semibold leading-tight">{category.name}</h3>
+        <div class="text-lg text-gray-500 pb-4">
           {filtered.length} resource{filtered.length > 1 ? 's' : ''}
         </div>
       </div>
