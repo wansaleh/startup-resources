@@ -3,11 +3,11 @@
 
   import FilterButton from '$lib/components/filter-button.svelte';
 
-  import ResourceCard from '$lib/components/resource-card.svelte';
-  import type { Resource } from '$lib/types';
+  import type { TCategory, TResource } from '$lib/types';
   import { cleanCategory } from '$lib/utils';
 
-  export let resources: Resource[];
+  export let resources: TResource[];
+  let categories: TCategory[];
   let filtered = resources;
   let activePricing = null;
 

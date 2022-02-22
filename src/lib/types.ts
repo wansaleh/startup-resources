@@ -1,4 +1,4 @@
-export type Resource = {
+export type TResource = {
   id: string;
   Price: string;
   Description: string;
@@ -11,4 +11,9 @@ export type Resource = {
   //   url: string;
   //   size?: string;
   // }[];
+};
+
+export type TCategory = {
+  name: string;
+  count: number;
 };

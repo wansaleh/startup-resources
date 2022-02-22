@@ -1,10 +1,10 @@
 <script lang="ts">
   import ResourceCard from './resource-card.svelte';
-  import type { Resource } from '$lib/types';
+  import type { TCategory, TResource } from '$lib/types';
   import { cleanCategory } from '$lib/utils';
 
-  export let category;
-  export let resources: Resource[];
+  export let category: TCategory;
+  export let resources: TResource[];
 
   let filtered = [];
   $: filtered = resources

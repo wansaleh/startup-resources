@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { Resource } from '$lib/types';
+  import type { TResource } from '$lib/types';
   // import { cleanCategory, cleanDomain } from '$lib/utils';
 
-  export let resource: Resource;
+  export let resource: TResource;
 </script>
 
 <div
