@@ -12,15 +12,6 @@
   let activePricing = null;
 
   $: pricings = ['Free', 'Paid', 'Subscription', '%'];
-  $: categories = [
-    ...new Set(resources.map((r) => cleanCategory(r.Category[0]))),
-  ]
-    .map((category) => ({
-      name: category,
-      count: resources.filter((r) => cleanCategory(r.Category[0]) === category)
-        .length,
-    }))
-    .sort((a, b) => b.count - a.count);
 
   $: filtered = resources.filter((r) => {
     if (activePricing) {
@@ -34,6 +25,16 @@
     }
     return true;
   });
+
+  $: categories = [
+    ...new Set(resources.map((r) => cleanCategory(r.Category[0]))),
+  ]
+    .map((category) => ({
+      name: category,
+      count: resources.filter((r) => cleanCategory(r.Category[0]) === category)
+        .length,
+    }))
+    .sort((a, b) => b.count - a.count);
 </script>
 
 <div class="layout pt-4 pb-20">
@@ -62,21 +63,6 @@
     </a>
   </h2>
 
-  <div class="flex flex-wrap gap-1.5 mb-4">
-    {#each categories as category}
-      <FilterButton
-        count={category.count}
-        onClick={() => {
-          document
-            .getElementById(category.name.replace(/\s+/g, '-'))
-            .scrollIntoView({ behavior: 'smooth' });
-        }}
-      >
-        {category.name}
-      </FilterButton>
-    {/each}
-  </div>
-
   <div class="flex flex-wrap gap-1.5 mb-8">
     <FilterButton
       isActive={activePricing === null}
@@ -96,6 +82,20 @@
         {:else}
           {pricing}
         {/if}
+      </FilterButton>
+    {/each}
+  </div>
+
+  <div class="flex flex-wrap gap-1.5 mb-4">
+    {#each categories as category}
+      <FilterButton
+        onClick={() => {
+          document
+            .getElementById(category.name.replace(/\s+/g, '-'))
+            .scrollIntoView({ behavior: 'smooth' });
+        }}
+      >
+        {category.name}
       </FilterButton>
     {/each}
   </div>
